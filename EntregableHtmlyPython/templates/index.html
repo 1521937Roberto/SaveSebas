@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesindex.css') }}">
+</head>
+<body>
+    <h1>Bienvenido a MUNDO-RGB-GAMING</h1>
+    
+    <div class="links">
+        <a href="{{ url_for('register') }}">Registrarse</a>
+        <a href="{{ url_for('login') }}">Iniciar Sesión</a>
+        <a href="{{ url_for('statistics') }}">Ver Estadísticas</a>
+        <a href="{{ url_for('login') }}">Admin</a>
+    </div>
+
+    <!-- Sección de imágenes -->
+    <div class="image-gallery">
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='img/auriculares.jpg') }}" alt="Producto 1">
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='img/audinos.jpg') }}" alt="Producto 2">
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='img/p9.jpg') }}" alt="Producto 3">
+        </div>
+
+
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='img/raton.jpg') }}" alt="Producto 1">
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='img/aorus.jpg') }}" alt="Producto 2">
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='img/teclados.jpg') }}" alt="Producto 3">
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='img/blue.jpg') }}" alt="Producto 2">
+        </div>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='img/monitor.jpg') }}" alt="Producto 3">
+        </div>
+    </div>
+</body>
+</html>
