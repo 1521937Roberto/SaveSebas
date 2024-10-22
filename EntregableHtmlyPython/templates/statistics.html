@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- ... (mantener las etiquetas meta y título) ... -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="main-content">
+            <header>
+                <h1>Estadísticas de Usuarios Registrados</h1>
+            </header>
+            <div class="charts">
+                <div class="chart-container pie">
+                    <canvas id="chartSexo"></canvas>
+                </div>
+                <div class="chart-container bar">
+                    <canvas id="chartEdad"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Datos de sexo enviados desde Flask
+        var countMasculino = {{ count_masculino }};
+        var countFemenino = {{ count_femenino }};
+
+        // Crear el gráfico de Sexo
+        var ctxSexo = document.getElementById('chartSexo').getContext('2d');
+        var chartSexo = new Chart(ctxSexo, {
+            type: 'pie',
+            data: {
+                labels: ['Masculino', 'Femenino'],
+                datasets: [{
+                    data: [countMasculino, countFemenino],
+                    backgroundColor: ['blue', 'pink'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Datos de edades enviados desde Flask
+        var edades = {{ edades | safe }};
+
+        // Crear el gráfico de barras para las edades
+        var ctxEdad = document.getElementById('chartEdad').getContext('2d');
+        var chartEdad = new Chart(ctxEdad, {
+            type: 'bar',
+            data: {
+                labels: edades.map((edad, index) => `Usuario ${index + 1}`),
+                datasets: [{
+                    label: 'Edades de los usuarios',
+                    data: edades,
+                    backgroundColor: 'green',
+                    borderWidth: 1,
+                    barPercentage: 0.5, // Ajusta el ancho de las barras
+                    categoryPercentage: 0.8 // Ajusta el espacio entre grupos de barras
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        ticks: {
+                            autoSkip: true,
+                            maxRotation: 90,
+                            minRotation: 0
+                        }
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
